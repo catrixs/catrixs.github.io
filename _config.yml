@@ -18,10 +18,10 @@ avatar: http://tp4.sinaimg.cn/1909668815/180/5703460996/1
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble: 
-  email: 
+  email: feiyang2168&@gmail.com
   facebook: 
   flickr: 
-  github: feiyang21687
+  github: catrixs
   instagram: 
   linkedin: 
   pinterest: 
@@ -40,17 +40,17 @@ comment:
     true
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics:
+google_analytics: UA-119596922-1
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url:
+url: https://catrixs.github.io
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
 # and NOT your User repository (http://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
-baseurl: ""
+baseurl: "/catrixs.github.io"
 
 #
 # !! You don't need to change any of the configuration flags below !!
