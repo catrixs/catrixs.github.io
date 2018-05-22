@@ -91,4 +91,4 @@ exclude:
 
 gem "github-pages", group: :jekyll_plugins
 
-remote_theme: "mmistakes/minimal-mistakes"
+theme                  : "minimal-mistakes-jekyll"
