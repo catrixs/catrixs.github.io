@@ -89,6 +89,4 @@ exclude:
   - README.md
   - CNAME
 
-gem "github-pages", group: :jekyll_plugins
-
-theme                  : "minimal-mistakes-jekyll"
+theme: jekyll-theme-minimal
