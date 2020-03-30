@@ -1,0 +1,55 @@
+---
+layout: post
+title:  Alpha010
+---
+
+### 公式
+
+<img src="https://render.githubusercontent.com/render/math?math=rank(((0 < ts\_min(delta(close, 1), 4)) ? delta(close, 1) : ((ts\_max(delta(close, 1), 4) < 0) ? delta(close, 1) : (-1 * delta(close, 1)))))">
+
+### 含义
+
+```
+IF 股票最近5天是否一直上涨？或者最近5天是否一直下跌？
+    最近一天的收盘价与前一天的收盘价的差值
+ELSE
+    取最近一天的收盘价与前一天的收盘价的差值的负数。
+
+再进行排序，买入连续上涨且涨幅大，连续震荡且昨日跌幅大，卖出连续下跌跌幅大
+```
+
+### 策略回测
+
+- 买入策略：昨日`Alpha010`的 Top30
+- 卖出策略：
+- 止损：低于平均成本价 10%
+
+```
+# 每个单位时间(如果按天回测,则每天调用一次,如果按分钟,则每分钟调用一次)调用一次
+def handle_data(context, data):
+    security = g.security
+    
+    alphas = Alphas(get_price(get_index_stocks('000300.XSHG'), count=180, end_date=datetime.now() - timedelta(1)))
+    a010 = alpha.alpha010().tail(1).T
+    top30 = a010.sort(a010.columns[-1]).dropna().tail(30)
+
+    holds = context.portfolio.positions.keys()
+
+    for i in top30.index:
+    	  # 每只买入 3.3%
+        cash = context.portfolio.cash
+        order_value(i, cash/30)
+        
+        print("Buying %s value = %s" % (i, cash/30))
+    
+    current_data = get_current_data() 
+    for stock in holds:
+        current = current_data[stock].last_price
+        cost = context.portfolio.positions[stock].avg_cost
+        # 现价低于平均成本的9成，卖出所有仓位
+        if current < cost*0.9:
+            order_target(stock, 0)
+            # 记录这次卖出
+            print("Selling %s" % (stock))
+```
+
